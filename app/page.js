@@ -1,95 +1,92 @@
+'use client'
 import Image from "next/image";
-import styles from "./page.module.css";
+import { SignIn } from "@clerk/nextjs";
+import { AppBar, Button, Container, Toolbar, Typography, Box, Grid, IconButton, Menu, MenuItem } from "@mui/material";
+import Head from "next/head";
+import Link from "next/link";
+import { Person } from "@mui/icons-material";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { useState } from "react";
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+  const [anchorEl, setAnchorEl] = useState(null);
+  
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  }
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+  return(
+    <Container maxWidth='100vw' disableGutters>
+      <Head>
+        <title>StuHub</title>
+        <meta name = "description" content="Create flashcards from your text" />
+      </Head>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+      <AppBar position="static">
+        <Toolbar sx={{backgroundColor: 'primary',height: 80}}>
+          <Box sx={{flexGrow: 1}}>
+          <Button color="inherit" href="/">
+          <Typography color='inherit'variant="h6" textTransform="none" href="page.js" style={{flexGrow: 1}} sx={{ml: 2}}>
+            StuHub
+          </Typography>
+          </Button>
+          </Box>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+          <SignedOut>
+            <Box sx={{mx: 2}}>
+            <Button color = "inherit"  href="/chat"> 
+              {' '}
+              <Typography color="inherit">Chat</Typography>
+            </Button>
+            <Button color="inherit" href="/resources"> 
+              {' '}
+              <Typography color="inherit">Resources</Typography>
+            </Button>
+            <Button color="inherit" href="/notifications"> 
+              {' '}
+              <Typography color="inherit">Notifications</Typography>
+            </Button>
+            <Button color="inherit" href="/discover"> 
+              {' '}
+              <Typography color="inherit">Discover</Typography>
+            </Button>
+            </Box>
+            <IconButton color="black" onClick={handleMenuOpen} sx={{mr: 2}}>
+              <Person/>
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}>
+                <MenuItem onClick={handleMenuClose} component="a" href="/sign-in">
+                Sign In
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose} component="a" href="/sign-up">
+                Sign Up
+                </MenuItem>
+            </Menu>  
+          </SignedOut>
+          
+          
+          <SignedIn>
+            <Box sx={{mx: 2}}>
+            <Button color = "inherit" href="/generate"> 
+              {' '}
+              Generate </Button>
+            <Button color="inherit" href="/flashcards"> 
+              {' '}
+              Saved </Button>
+            </Box>
+            <UserButton />
+          </SignedIn>
+        </Toolbar>
+      </AppBar>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
+      {/**Start with the page layout first */}
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+    </Container>
+  )
 }
