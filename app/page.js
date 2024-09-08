@@ -110,7 +110,7 @@ export default function Home() {
             }}
           >
             <Typography variant="h2" sx={{mt: 4}}>
-              Hello and Welcome to Dashboard</Typography>
+              Hello and Welcome to StuHub</Typography>
             <Typography variant="h6">
               {' '}
               A collaborative study platform with AI notes summary, flashcard creation, and more
@@ -201,7 +201,7 @@ export default function Home() {
                   <Typography variant="h6" gutterBottom>AI Powered</Typography>
                   <Typography>
                     {' '}
-                    Using our dvanced AI you can communicate via chat or ask it to generate flashcards for you.
+                    Using our advanced AI you can communicate via chat or ask it to generate flashcards for you.
                   </Typography>
                   <Button variant="contained" sx={{mt: 3, width:'100%', mx:'auto'}}>
                     View StuHub AI
