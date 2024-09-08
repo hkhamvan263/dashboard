@@ -123,7 +123,7 @@ export default function Home() {
             {' '}
             Create and share as many summarized notes as you need! 
             </Typography>
-            <Button variant="contained" sx={{mt: 3, width:'100%', mx:'auto'}}>
+            <Button href="/resources/notes" variant="contained" sx={{mt: 3, width:'100%', mx:'auto'}}>
                 Create Notes
             </Button>
             </Box>

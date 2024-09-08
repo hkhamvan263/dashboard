@@ -123,7 +123,7 @@ export default function Home() {
             {' '}
             Access your saved notes here.
             </Typography>
-            <Button variant="contained" sx={{mt: 3, width:'100%', mx:'auto'}}>
+            <Button href="/saved/notes/collections" variant="contained" sx={{mt: 3, width:'100%', mx:'auto'}}>
                 View Notes
             </Button>
             </Box>
